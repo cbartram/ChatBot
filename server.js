@@ -37,24 +37,34 @@ app.post('/send', (req, res) => {
             if(data.entities.hasOwnProperty('intent')) {
                 switch(data.entities.intent[0].value) {
                     case 'find_providers':
-                        res.json({msg: 'You have 5 Providers near you the closest one is 3.2 miles from you!'});
+                        res.json({msg: 'You have 5 Providers near you the closest one is 3.2 miles from you!', link: null});
                         break;
                     case 'deductible_info':
-                        res.json({msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.'});
+                        res.json({msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.', link: null});
+                        break;
+                    case 'insurance_purchase':
+                        res.json({
+                            msg: 'Awesome! I can recommend the BlueSelect or BlueOptions plans for you for only $226 and $310 per month respectively!',
+                            link: 'https://consumer.websales.floridablue.com/cws/shopping/info',
+                            subject: 'Insurance Purchase Info',
+                        });
                         break;
                     case 'greeting':
-                        res.json({msg: 'Hello! How can I help you today?'});
+                        res.json({msg: 'Hello! How can I help you today?', link: null});
                         break;
                     case 'bye':
-                        res.json({msg: 'Glad I could help, have a fantastic rest of your day!'});
+                        res.json({msg: 'Glad I could help, have a fantastic rest of your day!', link: null});
+                        break;
+                    case 'help':
+                        res.json({msg: 'What can I help you with? I can help with things like Insurance Purchases, Deductible information, and Provider data.', link: null});
                         break;
                     default:
                         console.log(data.entities.intent);
-                        res.json({msg: 'Yikes not really sure what to do'})
+                        res.json({msg: 'Yikes not really sure what to do', link: null})
 
                 }
             } else {
-                res.json({msg: 'Sorry im not sure what to do with your request :('})
+                res.json({msg: 'Sorry im not sure what to do with your request :(', link: null})
             }
         }).catch(console.error);
 });

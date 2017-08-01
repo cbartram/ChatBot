@@ -10,7 +10,7 @@ import Options from "./components/Options/Options";
 import Profile from "./components/Options/Profile/Profile";
 import OptionsList from "./components/Options/OptionsList/OptionsList";
 import Option from './components/Options/OptionsList/Option/Option';
-import LinkContainer from "./components/Options/Links/LinkContainer";
+import LinkContainer from "./components/Options/LinkContainer/LinkContainer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import QueryResults from "./components/QueryResults/QueryResults";
 
@@ -23,6 +23,7 @@ export default class App extends Component {
             messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?'}], //Default text sent from the Chat Bot
             showSearch: false,
             queryResults: [],
+            links: [],
         }
     }
 
@@ -32,6 +33,7 @@ export default class App extends Component {
      * */
     handleMessageSubmit = (message) => {
         let {messages} = this.state;
+        let links = [];
 
         messages.push(message); //The clients request
 
@@ -41,9 +43,14 @@ export default class App extends Component {
 
         //Send Message to Server
         MessageAPI.send(message, (res) => {
+            //There is link data coming back from the response that is applied to the conversation context
+            if(res.link !== null) {
+               links.push({link: res.link, subject: res.subject});
+            }
+
             messages.push({user: 0, text: res.msg}); //The servers response
 
-            this.setState({messages});
+            this.setState({messages, links});
         });
     };
 
@@ -63,11 +70,15 @@ export default class App extends Component {
     search = (text) => {
       let queryResults = [];
 
-      //O(n) time as messages grow
+      //O(n) time as messages grow longer
       this.state.messages.forEach((message) => {
           //Text matches
-          if(message.text.includes(text)) {
-                queryResults.push(`Found ${text} in ${message.text}`);
+          if(message.text.toUpperCase().includes(text.toUpperCase())) {
+                if(message.user === 0) {
+                    queryResults.push({__html: `Found <strong>${text}</strong> in the message <strong>"${message.text}"</strong> that was sent from <strong>ChatBot</strong>`});
+                } else {
+                    queryResults.push({__html: `Found <strong>${text}</strong> in the message <strong>"${message.text}"</strong> that was sent from <strong>You</strong>`});
+                }
           }
       });
 
@@ -90,20 +101,15 @@ export default class App extends Component {
                            <Option iconClass="fa fa-bell" iconColor="#0084ff" text="Notifications" />
                            <Option iconClass="fa fa-pencil" iconColor="#0084ff" text="Edit Name" />
                         </OptionsList>
-                        <LinkContainer>
-                            {/* Links or Pictures from the Conversation go here */}
+                        <LinkContainer data={this.state.links}>
+                            {/* Links or Pictures from the Conversation are passed to LinkContainer as props */}
                         </LinkContainer>
                     </Options>
                 </div>
                 <div className="col-md-9" style={{paddingLeft:0, borderLeft:0}}>
                     <div className="well overflow" style={{overflowY: 'scroll', overflowX: 'hidden'}} id="message-container">
-                        <SearchBar
-                            show={this.state.showSearch}
-                            onClick={(text) => this.search(text)}
-                        />
-                        <MessageList
-                            messages={this.state.messages}
-                        />
+                        <SearchBar show={this.state.showSearch} onClick={(text) => this.search(text)} />
+                        <MessageList messages={this.state.messages} />
                     </div>
                 </div>
             </div>

@@ -1,0 +1,9 @@
+.link-row {
+    overflow-x:hidden;
+}
+
+.btn-success {
+    background-color: rgb(19, 207, 19);
+    height:40px;
+    width:70%;
+}

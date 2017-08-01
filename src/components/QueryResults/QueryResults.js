@@ -15,9 +15,7 @@ export default class QueryResults extends Component {
                         <ul>
                             {
                                 this.props.results.map((result, key) => {
-                                    return (
-                                        <li key={key}>{result}</li>
-                                    )
+                                    return <li key={key} dangerouslySetInnerHTML={result} />
                                 })
                             }
                         </ul>

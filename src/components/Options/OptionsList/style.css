@@ -12,7 +12,6 @@
     width: auto;
     word-wrap: break-word;
     -webkit-font-smoothing: antialiased;
-    margin-left:5px;
 }
 
 .border-top {
@@ -21,8 +20,5 @@
 
 .margin {
      margin-top:10px;
-}
-
-.fa-ellipsis-h {
-    margin-left:20px;
+     margin-left:20px;
 }
