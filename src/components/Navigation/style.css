@@ -1,0 +1,22 @@
+.navbar-default {
+    border-radius:0;
+    background-color: #FFFFFF;
+    margin-bottom:0;
+}
+
+.navbar-text {
+    color:black;
+    font-size:16px;
+}
+
+.navbar-brand {
+    padding-left:10px;
+}
+
+.navbar-collapse {
+    text-align:center;
+}
+.navbar-nav {
+    display:inline-block;
+    float:none;
+}

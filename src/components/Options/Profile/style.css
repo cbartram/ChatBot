@@ -1,0 +1,44 @@
+.name {
+    color: rgb(29, 33, 41);
+    direction: ltr;
+    display: block;
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 17px;
+    letter-spacing: -0.24px;
+    line-height: 17.92px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    text-rendering: optimizeLegibility;
+    user-select: none;
+    white-space: nowrap;
+    width: 91px;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    margin-top:20px;
+    margin-left:20px;
+}
+
+.name-subtitle {
+    color: rgba(0, 0, 0, 0.4);
+    direction: ltr;
+    display: inline;
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    height: auto;
+    letter-spacing: -0.24px;
+    line-height: 15px;
+    text-rendering: optimizeLegibility;
+    user-select: none;
+    width: auto;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    margin-left:20px;
+}
+
+.fa-cog {
+    font-size:30px;
+    margin-top:20px;
+    margin-left:20px;
+}

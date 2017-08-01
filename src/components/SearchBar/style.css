@@ -1,0 +1,57 @@
+.search-container {
+    width:100%;
+    background-color:rgba(255, 255, 255, .4);
+    height:50px;
+    border-bottom:1px solid rgba(0, 0, 0, .1);
+    border-left:1px solid rgba(0, 0, 0, .1);
+}
+
+.fa-search {
+    color: rgba(0, 0, 0, .4);
+}
+
+label {
+    background-color:rgb(246, 247, 249);
+    padding-left:6px;
+}
+
+.search-input {
+    width:320px;
+    height:30px;
+    background: rgb(246, 247, 249);
+    border:none;
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.search-input:focus {
+    outline:0;
+}
+
+.col-8-custom {
+    margin-top:10px;
+    margin-left:10px;
+}
+
+.btn-primary {
+    height:30px;
+    width:70px;
+}
+
+.search-input::-webkit-input-placeholder {
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.search-inputt:-ms-input-placeholder {
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.search-input:-moz-placeholder {
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.search-input::-moz-placeholder {
+    font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
