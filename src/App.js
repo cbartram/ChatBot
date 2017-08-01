@@ -27,7 +27,7 @@ const customStyles = {
         backgroundColor: 'rgba(0, 0, 0, 0.70)'
     },
     content:{
-        padding: '0',
+        padding: '15',
         overflow: 'hidden',
         top: '50%',
         left: '50%',
@@ -61,7 +61,7 @@ export default class App extends Component {
      * */
     handleMessageSubmit = (message) => {
         let {messages} = this.state;
-        let links = [];
+        let linkData = [];
 
         messages.push(message); //The clients request
 
@@ -69,12 +69,12 @@ export default class App extends Component {
         MessageAPI.send(message, (res) => {
             //There is link data coming back from the response that is applied to the conversation context
             if(res.link !== null) {
-               links.push({link: res.link, subject: res.subject});
+               linkData.push({link: res.link, subject: res.subject, label: res.label});
             }
 
             messages.push({user: 0, text: res.msg, color: '#f1f0f0'}); //The servers response
 
-            this.setState({messages, links});
+            this.setState({messages, links: linkData});
         });
     };
 
@@ -135,8 +135,18 @@ export default class App extends Component {
                 <div className="col-md-3" style={{paddingRight:0}}>
 
                     <Modal isOpen={this.state.modal} contentLabel="Modal" style={customStyles}>
-                        <div className="modal-header" style={{backgroundColor: this.state.color, border:`3px solid ${this.state.color}`}}>Pick a new Color</div>
-                        <CirclePicker onChange={(color) => this.handleColorChange(color)} circleSize={45} />
+                        <div className="modal-header">
+                            Pick a color for this conversation
+                            <p className="subtext">Everyone in the conversation will see this</p>
+                        </div>
+                        <div className="modal-body">
+                            <CirclePicker onChange={(color) => this.handleColorChange(color)} circleSize={45} />
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12 col-sm-12">
+                                <button className="btn btn-default btn-cancel" onClick={this.toggleModal}>Cancel</button>
+                            </div>
+                        </div>
                     </Modal>
 
 

@@ -37,7 +37,12 @@ app.post('/send', (req, res) => {
             if(data.entities.hasOwnProperty('intent')) {
                 switch(data.entities.intent[0].value) {
                     case 'find_providers':
-                        res.json({msg: 'You have 5 Providers near you the closest one is 3.2 miles from you!', link: null});
+                        res.json({
+                            msg: `You have 5 Providers near you the closest one is 3.2 miles from you, I've marked their location in your links!`,
+                            link: 'http://maps.apple.com/?q=Doctor',
+                            subject: 'Care Providers',
+                            label: 'danger'
+                        });
                         break;
                     case 'deductible_info':
                         res.json({msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.', link: null});
@@ -47,6 +52,7 @@ app.post('/send', (req, res) => {
                             msg: 'Awesome! I can recommend the BlueSelect or BlueOptions plans for you for only $226 and $310 per month respectively!',
                             link: 'https://consumer.websales.floridablue.com/cws/shopping/info',
                             subject: 'Insurance Purchase Info',
+                            label: 'primary2'
                         });
                         break;
                     case 'test':

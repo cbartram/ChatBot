@@ -21,3 +21,66 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
+.btn-danger {
+    background-color: white;
+    color: rgb(207, 9, 76);
+    border:1px solid rgb(207, 9, 76);
+    height:40px;
+    width:65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-danger:hover {
+    color:white;
+    background-color:rgb(207, 9, 76);
+    border:1px solid rgb(207, 9, 76);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.btn-warning {
+    background-color: white;
+    color: rgb(252, 238, 109);
+    border:1px solid rgb(252, 238, 109);
+    height:40px;
+    width:65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-warning:hover {
+    color:white;
+    background-color:rgb(252, 238, 109);
+    border:1px solid rgb(252, 238, 109);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.btn-primary2 {
+    background-color: white;
+    color: #0084ff;
+    border:1px solid #0084ff;
+    height:40px;
+    width:65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-primary2:hover {
+    color:white;
+    background-color:#0084ff;
+    border:1px solid #0084ff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

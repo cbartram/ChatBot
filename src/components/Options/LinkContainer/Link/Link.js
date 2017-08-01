@@ -7,7 +7,7 @@ export default class Link extends Component {
         return (
             <div className="row link-row">
                 <div className="col-md-8">
-                    <a href={this.props.value}><button className="btn btn-success"><span className="fa fa-link"/> {this.props.subject}</button></a>
+                    <a href={this.props.value}><button className={`btn btn-${this.props.label}`}><span className="fa fa-link"/> {this.props.subject}</button></a>
                 </div>
             </div>
         );

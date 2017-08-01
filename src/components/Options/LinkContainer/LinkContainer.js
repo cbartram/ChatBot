@@ -11,7 +11,7 @@ export default class LinkContainer extends Component {
                 <OptionsList name="Links"/>
                 {
                     this.props.data.map((val, key) => {
-                      return (<Link key={key} value={val.link} subject={val.subject} />);
+                      return (<Link key={key} value={val.link} label={val.label} subject={val.subject} />);
                     })
                 }
             </div>

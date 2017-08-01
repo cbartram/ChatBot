@@ -18,12 +18,50 @@ html, body, h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .modal-header {
-    color:white;
+    color:black;
     width:100%;
     height:60px;
-    font-size:20px;
-    margin-bottom:15px;
-    text-align: center;
+    font-size:16px;
+    margin-bottom:25px;
+    font-weight:400;
+    border-bottom:none;
+}
+
+.modal-body {
+    height:100%;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.subtext {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.btn-cancel {
+    height:20px;
+    margin-left:85px;
+    margin-bottom:30px;
+    font-size:16px;
+    color: #0084ff;
+    background-color:white;
+    border:none;
+}
+.btn-cancel:active {
+    outline:0;
+    background-color:white;
+    border:none;
+}
+
+.btn-cancel:focus {
+    outline: 0;
+    background-color:white;
+    border:none;
+}
+
+.btn-cancel:hover {
+    background-color:white;
 }
 
 .overflow {
