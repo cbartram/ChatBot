@@ -11,7 +11,9 @@ export default class SearchBar extends Component {
     }
 
     handleTextChange = (e) => {
-        this.setState({value: e.target.value});
+        this.setState({value: e.target.value}, () => {
+            this.props.onClick(this.state.value);
+        });
     };
 
   doRender = () => {
@@ -25,10 +27,6 @@ export default class SearchBar extends Component {
                               <span className="input-group-addon" id="basic-addon1"><i className="fa fa-search"/> </span>
                               <input type="text" className="form-control" value={this.state.value} onChange={(e) => this.handleTextChange(e)} placeholder="Search..." aria-describedby="basic-addon1"/>
                           </div>
-                      </div>
-                      <div className="col-md-2 col-sm-2 col-sm-offset-1">
-                          <button className="btn btn-sm btn-primary" onClick={() => this.props.onClick(this.state.value)}> Search</button>
-
                       </div>
                   </div>
               </div>

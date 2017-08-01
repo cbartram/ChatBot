@@ -3,7 +3,15 @@
 }
 
 .btn-success {
-    background-color: rgb(19, 207, 19);
+    background-color: white;
+    color:rgb(19, 207, 19);
+    border:1px solid rgb(19, 207, 19);
     height:40px;
-    width:70%;
+    width:65%;
+}
+
+.btn-success:hover {
+    color:white;
+    background-color:rgb(19, 207, 19);
+    border:1px solid rgb(19, 207, 19);
 }
