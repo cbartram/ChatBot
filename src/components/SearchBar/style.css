@@ -16,7 +16,7 @@ label {
 }
 
 .search-input {
-    width:320px;
+    width:100%;
     height:30px;
     background: rgb(246, 247, 249);
     border:none;
@@ -35,6 +35,7 @@ label {
 .btn-primary {
     height:30px;
     width:70px;
+    background-color:#0084ff;
 }
 
 .search-input::-webkit-input-placeholder {

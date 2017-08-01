@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -2140,4 +2140,3 @@ If you have ideas for more “How To” recipes that should be on this page, [le
 =======
 # ChatBot
 A Simple Wit.Ai powered Healthcare Chatbot
->>>>>>> 73e34c06331663760fec3628b1cefb7c75fa25b5

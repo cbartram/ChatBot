@@ -35,7 +35,6 @@ export default class MessageList extends Component {
 
     render() {
         return(
-            <div className='row row-input'>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
                     <textarea
                         type="submit"
@@ -46,7 +45,6 @@ export default class MessageList extends Component {
                         value={this.state.text}
                     />
                 </form>
-            </div>
         );
     }
 }

@@ -6,13 +6,14 @@
 textarea {
     border: none;
     border-bottom:1px solid rgba(0, 0, 0, .1);
+    border-left:1px solid rgba(0, 0, 0, .1);
 
 }
 
 textarea:focus { outline:0; }
 
 .row-input {
-    width:98.3%;
+    width:calc(100% - 17px);
     height:46px;
     border-top:1px solid rgba(0, 0, 0, .10);
     position: absolute; left:16px;  bottom: 0;

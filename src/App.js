@@ -15,6 +15,7 @@ import Notifications from "./components/Options/OptionsList/Notifications/Notifi
 import EditName from "./components/Options/OptionsList/EditName/EditName";
 import LinkContainer from "./components/Options/Links/LinkContainer";
 import SearchBar from "./components/SearchBar/SearchBar";
+import QueryResults from "./components/QueryResults/QueryResults";
 
 export default class App extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ export default class App extends Component {
             users: [1],
             messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?'}], //Default text sent from the Chat Bot
             showSearch: false,
+            queryResults: [],
         }
     }
 
@@ -62,7 +64,14 @@ export default class App extends Component {
      * @param text String the text to search the messages for
      * */
     search = (text) => {
-      //todo search the messages for the text
+      let data = [];
+
+      this.state.messages.forEach((message) => {
+          //Text matches
+          if(message.text.includes(text)) {
+                data.push()
+          }
+      })
     };
 
 
@@ -85,8 +94,8 @@ export default class App extends Component {
                         </LinkContainer>
                     </Options>
                 </div>
-                <div className="col-md-8" style={{paddingLeft:0, borderLeft:0}}>
-                    <div className="well overflow" style={{overflowY: 'auto', overflowX: 'hidden'}} id="message-container">
+                <div className="col-md-9" style={{paddingLeft:0, borderLeft:0}}>
+                    <div className="well overflow" style={{overflowY: 'scroll', overflowX: 'hidden'}} id="message-container">
                         <SearchBar
                             show={this.state.showSearch}
                             onClick={(text) => this.search(text)}
@@ -94,13 +103,22 @@ export default class App extends Component {
                         <MessageList
                             messages={this.state.messages}
                         />
-                        <MessageForm
-                            onMessageSubmit={(message) => this.handleMessageSubmit(message)}
-                            user={this.state.users}
-                        />
                     </div>
                 </div>
             </div>
+
+            <div className="row">
+                <div className="col-md-3" style={{paddingRight:0}}>
+                    <QueryResults results={this.state.queryResults} />
+                </div>
+                <div className="col-md-9" style={{paddingLeft: 0, borderLeft:0 }}>
+                    <MessageForm
+                        onMessageSubmit={(message) => this.handleMessageSubmit(message)}
+                        user={this.state.users}
+                    />
+                </div>
+            </div>
+
         </div>
         )
      }

@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import './style.css';
 
 export default class SearchBar extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            value: ''
+        }
+    }
+
+    handleTextChange = (e) => {
+        this.setState({value: e.target.value});
+    };
 
   doRender = () => {
       if(this.props.show) {
@@ -9,15 +20,15 @@ export default class SearchBar extends Component {
           return (
               <div className="search-container">
                   <div className="row">
-                      <div className="col-md-5 col-8-custom">
-                          <form>
-                              <label className="fa fa-search" htmlFor="#search-bar">
-                                  &nbsp;<input id="search-bar" type="text" placeholder="Search..." className="search-input" />
-                              </label>
-                          </form>
+                      <div className="col-md-4 col-sm-8 col-xs-9 col-8-custom">
+                          <div className="input-group">
+                              <span className="input-group-addon" id="basic-addon1"><i className="fa fa-search"/> </span>
+                              <input type="text" className="form-control" value={this.state.value} onChange={(e) => this.handleTextChange(e)} placeholder="Search..." aria-describedby="basic-addon1"/>
+                          </div>
                       </div>
-                      <div className="col-md-2">
-                          <button className="btn btn-sm btn-primary" onClick={this.props.onClick}> Search</button>
+                      <div className="col-md-2 col-sm-2 col-sm-offset-1">
+                          <button className="btn btn-sm btn-primary" onClick={() => this.props.onClick(this.state.value)}> Search</button>
+
                       </div>
                   </div>
               </div>

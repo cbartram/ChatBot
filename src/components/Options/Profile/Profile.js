@@ -8,7 +8,9 @@ export default class Profile extends Component {
         return (
             <div className="row">
                 <div className="col-md-2">
-                    <Avatar user={true}/>
+                    <div className="avatar-container">
+                        <Avatar user={true} />
+                    </div>
                 </div>
                 <div className="col-md-6">
                     <div className="row">

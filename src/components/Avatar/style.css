@@ -10,10 +10,12 @@
     background-image: url('./profile.jpg');
     background-size: 45px 45px;
     background-repeat: no-repeat;
+    margin-left:30px;
 }
 
 .avatar-bot {
     background-image: url('./bot.jpg');
     background-size: 45px 45px;
     background-repeat: no-repeat;
+    margin-left:30px;
 }

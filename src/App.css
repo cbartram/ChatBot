@@ -1,6 +1,5 @@
-body, h1, h2, h3, h4, h5, h6, p, span {
+html, body, h1, h2, h3, h4, h5, h6, p, span {
     font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
 }
 .container-fluid {
     padding-left:0;
@@ -12,9 +11,9 @@ body, h1, h2, h3, h4, h5, h6, p, span {
     border-radius:0;
     box-shadow:none;
     border-top:none;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 0;
     height:500px;
-    margin-bottom:0px;
+    margin-bottom:0;
 }
 
 .overflow {

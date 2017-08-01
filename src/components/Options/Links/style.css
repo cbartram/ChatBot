@@ -1,5 +1,6 @@
 .large {
-    height:100vh;
+    height:200px;
+    overflow-y:auto;
 }
 
 .options-text {

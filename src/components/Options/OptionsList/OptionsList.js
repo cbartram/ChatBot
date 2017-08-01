@@ -5,7 +5,7 @@ export default class OptionsList extends Component {
 
     render() {
         return (
-            <div className="row border-top" style={{width: '100%'}}>
+            <div className={`row border-top ${this.props.additionalClass}`} style={{width: '100%'}}>
                 <div className="col-md-9 margin">
                     <span className="options-text">{this.props.name}</span>
                 </div>

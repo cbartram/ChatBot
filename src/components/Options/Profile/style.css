@@ -6,7 +6,7 @@
     font-size: 14px;
     height: 17px;
     letter-spacing: -0.24px;
-    line-height: 17.92px;
+    line-height: 17px;
     overflow-x: hidden;
     overflow-y: hidden;
     text-overflow: ellipsis;
@@ -18,6 +18,11 @@
     -webkit-font-smoothing: antialiased;
     margin-top:20px;
     margin-left:20px;
+}
+
+.avatar-container {
+    width:45px;
+    height:45px;
 }
 
 .name-subtitle {
