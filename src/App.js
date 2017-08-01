@@ -9,10 +9,7 @@ import Navigation from './components/Navigation/Navigation';
 import Options from "./components/Options/Options";
 import Profile from "./components/Options/Profile/Profile";
 import OptionsList from "./components/Options/OptionsList/OptionsList";
-import SearchOption from "./components/Options/OptionsList/Search/SearchOption";
-import ChangeColor from "./components/Options/OptionsList/ChangeColor/SearchOption";
-import Notifications from "./components/Options/OptionsList/Notifications/Notifications";
-import EditName from "./components/Options/OptionsList/EditName/EditName";
+import Option from './components/Options/OptionsList/Option/Option';
 import LinkContainer from "./components/Options/Links/LinkContainer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import QueryResults from "./components/QueryResults/QueryResults";
@@ -88,10 +85,10 @@ export default class App extends Component {
                     <Options>
                         <Profile/>
                         <OptionsList name="Options">
-                           <SearchOption onClick={this.toggleSearch} />
-                           <ChangeColor/>
-                           <Notifications/>
-                           <EditName/>
+                           <Option onClick={this.toggleSearch} iconClass="fa fa-search" iconColor="#0084ff" text="Search in Conversation" />
+                           <Option iconClass="fa fa-paint-brush" iconColor="#0084ff" text="Change Color" />
+                           <Option iconClass="fa fa-bell" iconColor="#0084ff" text="Notifications" />
+                           <Option iconClass="fa fa-pencil" iconColor="#0084ff" text="Edit Name" />
                         </OptionsList>
                         <LinkContainer>
                             {/* Links or Pictures from the Conversation go here */}

@@ -39,10 +39,18 @@ app.post('/send', (req, res) => {
                     case 'find_providers':
                         res.json({msg: 'You have 5 Providers near you the closest one is 3.2 miles from you!'});
                         break;
+                    case 'deductible_info':
+                        res.json({msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.'});
+                        break;
+                    case 'greeting':
+                        res.json({msg: 'Hello! How can I help you today?'});
+                        break;
+                    case 'bye':
+                        res.json({msg: 'Glad I could help, have a fantastic rest of your day!'});
+                        break;
                     default:
                         console.log(data.entities.intent);
                         res.json({msg: 'Yikes not really sure what to do'})
-
 
                 }
             } else {
