@@ -9,8 +9,8 @@ export default class Message extends Component {
 
     renderText = () => {
         return this.props.user >= 1 ?
-            <p className="message-user">{this.props.text}</p> :
-            <p className="message-bot">{this.props.text}</p>
+            <p className="message-user" style={{backgroundColor: this.props.color}}>{this.props.text}</p> :
+            <p className="message-bot" style={{backgroundColor: this.props.color}}>{this.props.text}</p>
     };
 
     render() {

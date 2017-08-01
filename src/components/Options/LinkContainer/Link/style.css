@@ -8,10 +8,16 @@
     border:1px solid rgb(19, 207, 19);
     height:40px;
     width:65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .btn-success:hover {
     color:white;
     background-color:rgb(19, 207, 19);
     border:1px solid rgb(19, 207, 19);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

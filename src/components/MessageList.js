@@ -12,6 +12,7 @@ export default class MessageList extends Component {
                                 key={i}
                                 user={message.user}
                                 text={message.text}
+                                color={message.color}
                             />
                         );
                     })

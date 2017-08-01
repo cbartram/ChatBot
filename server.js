@@ -49,6 +49,9 @@ app.post('/send', (req, res) => {
                             subject: 'Insurance Purchase Info',
                         });
                         break;
+                    case 'test':
+                        res.json({msg: 'I read you loud and clear! What can I assist you with today?', link: null});
+                        break;
                     case 'greeting':
                         res.json({msg: 'Hello! How can I help you today?', link: null});
                         break;
@@ -64,7 +67,7 @@ app.post('/send', (req, res) => {
 
                 }
             } else {
-                res.json({msg: 'Sorry im not sure what to do with your request :(', link: null})
+                res.json({msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"', link: null})
             }
         }).catch(console.error);
 });

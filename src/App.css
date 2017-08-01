@@ -17,6 +17,15 @@ html, body, h1, h2, h3, h4, h5, h6, p, span {
     margin-bottom:0;
 }
 
+.modal-header {
+    color:white;
+    width:100%;
+    height:60px;
+    font-size:20px;
+    margin-bottom:15px;
+    text-align: center;
+}
+
 .overflow {
     overflow-x: scroll;
 }

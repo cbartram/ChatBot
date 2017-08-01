@@ -16,7 +16,8 @@ export default class MessageList extends Component {
         //Create the Message Object
         let message = {
             user : this.props.user,
-            text : this.state.text
+            text : this.state.text,
+            color : this.props.color,
         };
 
         this.props.onMessageSubmit(message);

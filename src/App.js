@@ -13,6 +13,32 @@ import Option from './components/Options/OptionsList/Option/Option';
 import LinkContainer from "./components/Options/LinkContainer/LinkContainer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import QueryResults from "./components/QueryResults/QueryResults";
+import Modal from "react-modal";
+import { CirclePicker } from 'react-color';
+
+//Custom modal styles
+const customStyles = {
+    overlay:{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.70)'
+    },
+    content:{
+        padding: '0',
+        overflow: 'hidden',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        background: '#FFFFFF',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '4px',
+    }
+};
 
 export default class App extends Component {
     constructor(props) {
@@ -20,10 +46,12 @@ export default class App extends Component {
 
         this.state = {
             users: [1],
-            messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?'}], //Default text sent from the Chat Bot
-            showSearch: false,
+            messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?', color: '#f1f0f0'}], //Default text sent from the Chat Bot
+            showSearch: false, //Toggles the search bar open or closed
             queryResults: [],
             links: [],
+            modal: false, //Toggles the modal open or closed
+            color: '#0084ff',
         }
     }
 
@@ -37,10 +65,6 @@ export default class App extends Component {
 
         messages.push(message); //The clients request
 
-        //Scrolls to the bottom when new messages are added
-        let elem = document.getElementById('message-container');
-        elem.scrollTop = elem.scrollHeight;
-
         //Send Message to Server
         MessageAPI.send(message, (res) => {
             //There is link data coming back from the response that is applied to the conversation context
@@ -48,7 +72,7 @@ export default class App extends Component {
                links.push({link: res.link, subject: res.subject});
             }
 
-            messages.push({user: 0, text: res.msg}); //The servers response
+            messages.push({user: 0, text: res.msg, color: '#f1f0f0'}); //The servers response
 
             this.setState({messages, links});
         });
@@ -61,6 +85,15 @@ export default class App extends Component {
       this.setState(prevState => {
           return {showSearch: !prevState.showSearch}
       });
+    };
+
+    /**
+     * Handles toggling the modal on or off
+     */
+    toggleModal = () => {
+        this.setState(prevState => {
+            return {modal: !prevState.modal}
+        });
     };
 
     /**
@@ -86,6 +119,13 @@ export default class App extends Component {
 
     };
 
+    handleColorChange = (color) => {
+        this.setState({color: color.hex});
+
+        //Toggle the modal once the color is selected
+        this.toggleModal();
+    };
+
 
   render() {
     return (
@@ -93,21 +133,29 @@ export default class App extends Component {
             <Navigation/>
             <div className="row">
                 <div className="col-md-3" style={{paddingRight:0}}>
+
+                    <Modal isOpen={this.state.modal} contentLabel="Modal" style={customStyles}>
+                        <div className="modal-header" style={{backgroundColor: this.state.color, border:`3px solid ${this.state.color}`}}>Pick a new Color</div>
+                        <CirclePicker onChange={(color) => this.handleColorChange(color)} circleSize={45} />
+                    </Modal>
+
+
                     <Options>
                         <Profile/>
                         <OptionsList name="Options">
-                           <Option onClick={this.toggleSearch} iconClass="fa fa-search" iconColor="#0084ff" text="Search in Conversation" />
-                           <Option iconClass="fa fa-paint-brush" iconColor="#0084ff" text="Change Color" />
-                           <Option iconClass="fa fa-bell" iconColor="#0084ff" text="Notifications" />
-                           <Option iconClass="fa fa-pencil" iconColor="#0084ff" text="Edit Name" />
+                           <Option onClick={this.toggleSearch} iconClass="fa fa-search" iconColor={this.state.color} text="Search in Conversation" />
+                           <Option iconClass="fa fa-paint-brush" iconColor={this.state.color} text="Change Color" onClick={this.toggleModal} />
+                           <Option iconClass="fa fa-bell" iconColor={this.state.color} text="Notifications" />
+                           <Option iconClass="fa fa-pencil" iconColor={this.state.color} text="Edit Name" />
                         </OptionsList>
                         <LinkContainer data={this.state.links}>
                             {/* Links or Pictures from the Conversation are passed to LinkContainer as props */}
                         </LinkContainer>
                     </Options>
+
                 </div>
                 <div className="col-md-9" style={{paddingLeft:0, borderLeft:0}}>
-                    <div className="well overflow" style={{overflowY: 'scroll', overflowX: 'hidden'}} id="message-container">
+                    <div className="well overflow" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
                         <SearchBar show={this.state.showSearch} onClick={(text) => this.search(text)} />
                         <MessageList messages={this.state.messages} />
                     </div>
@@ -119,10 +167,7 @@ export default class App extends Component {
                     <QueryResults results={this.state.queryResults} />
                 </div>
                 <div className="col-md-9" style={{paddingLeft: 0, borderLeft:0 }}>
-                    <MessageForm
-                        onMessageSubmit={(message) => this.handleMessageSubmit(message)}
-                        user={this.state.users}
-                    />
+                    <MessageForm color={this.state.color} onMessageSubmit={(message) => this.handleMessageSubmit(message)} user={this.state.users} />
                 </div>
             </div>
 

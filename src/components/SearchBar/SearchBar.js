@@ -12,7 +12,9 @@ export default class SearchBar extends Component {
 
     handleTextChange = (e) => {
         this.setState({value: e.target.value}, () => {
-            this.props.onClick(this.state.value);
+            if(this.state.value !== '') {
+                this.props.onClick(this.state.value);
+            }
         });
     };
 
