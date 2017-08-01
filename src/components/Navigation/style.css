@@ -20,3 +20,7 @@
     display:inline-block;
     float:none;
 }
+
+.navbar-right {
+    float:right;
+}

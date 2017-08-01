@@ -50,7 +50,7 @@ export default class App extends Component {
             showSearch: false, //Toggles the search bar open or closed
             queryResults: [],
             links: [],
-            modal: false, //Toggles the modal open or closed
+            modal: false, //Toggles the modal open or closed for the change color
             color: '#0084ff',
         }
     }
@@ -134,6 +134,7 @@ export default class App extends Component {
             <div className="row">
                 <div className="col-md-3" style={{paddingRight:0}}>
 
+                    {/* This modal is shown when the color button is clicked */}
                     <Modal isOpen={this.state.modal} contentLabel="Modal" style={customStyles}>
                         <div className="modal-header">
                             Pick a color for this conversation

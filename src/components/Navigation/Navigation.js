@@ -10,9 +10,7 @@ export default class Navigation extends Component {
                         <div className="navbar-nav">
                             <p className="navbar-text">Florida Blue ChatBot</p>
                         </div>
-                        <div className="navbar-nav">
 
-                        </div>
                     </div>
                 </div>
             </nav>
