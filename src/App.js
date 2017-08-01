@@ -64,14 +64,18 @@ export default class App extends Component {
      * @param text String the text to search the messages for
      * */
     search = (text) => {
-      let data = [];
+      let queryResults = [];
 
+      //O(n) time as messages grow
       this.state.messages.forEach((message) => {
           //Text matches
           if(message.text.includes(text)) {
-                data.push()
+                queryResults.push(`Found ${text} in ${message.text}`);
           }
-      })
+      });
+
+      this.setState({queryResults});
+
     };
 
 

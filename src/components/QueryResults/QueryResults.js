@@ -14,9 +14,9 @@ export default class QueryResults extends Component {
                     <div className="col-md-12">
                         <ul>
                             {
-                                this.props.results.map((result) => {
+                                this.props.results.map((result, key) => {
                                     return (
-                                        <li>{result}</li>
+                                        <li key={key}>{result}</li>
                                     )
                                 })
                             }
