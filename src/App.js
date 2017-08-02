@@ -15,6 +15,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import QueryResults from "./components/QueryResults/QueryResults";
 import Modal from "react-modal";
 import { CirclePicker } from 'react-color';
+import $ from "jquery";
+
 
 //Custom modal styles
 const customStyles = {
@@ -52,8 +54,25 @@ export default class App extends Component {
             links: [],
             modal: false, //Toggles the modal open or closed for the change color
             color: '#0084ff',
+            width: $(window).width(),
+            height: $(window).height(),
         }
     }
+
+    updateDimensions = () => {
+        console.log($(window).height());
+        this.setState({width: $(window).width(), height: $(window).height()});
+    };
+    componentWillMount = () => {
+        this.updateDimensions();
+    };
+
+    componentDidMount = () => {
+        window.addEventListener("resize", this.updateDimensions);
+    };
+    componentWillUnmount = () => {
+        window.removeEventListener("resize", this.updateDimensions);
+    };
 
     /**
      * Handles when a user's message is sent to the chatbot
@@ -132,7 +151,7 @@ export default class App extends Component {
         <div className="container-fluid">
             <Navigation/>
             <div className="row">
-                <div className="col-md-3" style={{paddingRight:0}}>
+                <div className="col-md-3 no-padd-right">
 
                     {/* This modal is shown when the color button is clicked */}
                     <Modal isOpen={this.state.modal} contentLabel="Modal" style={customStyles}>
@@ -162,11 +181,12 @@ export default class App extends Component {
                         <LinkContainer data={this.state.links}>
                             {/* Links or Pictures from the Conversation are passed to LinkContainer as props */}
                         </LinkContainer>
+                        <QueryResults results={this.state.queryResults} />
                     </Options>
 
                 </div>
-                <div className="col-md-9" style={{paddingLeft:0, borderLeft:0}}>
-                    <div className="well overflow" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+                <div className="col-md-9 no-padd">
+                    <div className="well overflow" style={{height: this.state.height - 106}}> {/* Subtract 46 PX from the height for the form */}
                         <SearchBar show={this.state.showSearch} onClick={(text) => this.search(text)} />
                         <MessageList messages={this.state.messages} />
                     </div>
@@ -174,10 +194,7 @@ export default class App extends Component {
             </div>
 
             <div className="row">
-                <div className="col-md-3" style={{paddingRight:0}}>
-                    <QueryResults results={this.state.queryResults} />
-                </div>
-                <div className="col-md-9" style={{paddingLeft: 0, borderLeft:0 }}>
+                <div className="col-md-9 col-md-offset-3 no-padd">
                     <MessageForm color={this.state.color} onMessageSubmit={(message) => this.handleMessageSubmit(message)} user={this.state.users} />
                 </div>
             </div>

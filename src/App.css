@@ -13,8 +13,22 @@ html, body, h1, h2, h3, h4, h5, h6, p, span {
     box-shadow:none;
     border-top:none;
     padding: 0 0 0 0;
-    height:500px;
+    /*height:92vh;*/
     margin-bottom:0;
+    display: flex;
+    flex-basis: 0;
+    flex-direction: column;
+    flex-grow: 2;
+    flex-shrink: 0;
+}
+
+.no-padd {
+    padding-left:0;
+    border-left: none
+}
+
+.no-padd-right {
+    padding-right:0;
 }
 
 .modal-header {
@@ -65,5 +79,6 @@ html, body, h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .overflow {
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
