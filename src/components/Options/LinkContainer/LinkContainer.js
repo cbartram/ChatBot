@@ -7,7 +7,7 @@ export default class LinkContainer extends Component {
 
     render() {
         return (
-            <div className="row large">
+            <div className="large">
                 <OptionsList name="Links"/>
                 {
                     this.props.data.map((val, key) => {

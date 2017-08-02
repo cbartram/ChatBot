@@ -7,10 +7,8 @@ export default class QueryResults extends Component {
     render() {
         return (
             <div className="query-results">
+                <OptionsList name="Search Results" />
                 <div className="row">
-                    <OptionsList name="Search Results" additionalClass="resize" />
-                </div>
-                <div className="row bordered-row">
                     <div className="col-md-12">
                         <ul>
                             {

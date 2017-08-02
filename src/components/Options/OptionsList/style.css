@@ -5,7 +5,6 @@
     font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     height: auto;
-    letter-spacing: -0.24px;
     line-height: 15px;
     text-rendering: optimizeLegibility;
     user-select: none;
@@ -16,6 +15,8 @@
 
 .border-top {
     border-top:1px solid rgba(0, 0, 0, .1);
+    margin-left:0;
+    margin-right:0;
 }
 
 .margin {

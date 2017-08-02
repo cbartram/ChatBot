@@ -186,7 +186,7 @@ export default class App extends Component {
 
                 </div>
                 <div className="col-md-9 no-padd">
-                    <div className="well overflow" style={{height: this.state.height - 106}}> {/* Subtract 46 PX from the height for the form */}
+                    <div className="well overflow" style={{height: this.state.height - 106}}> {/* Subtract 106 PX from the height for the form */}
                         <SearchBar show={this.state.showSearch} onClick={(text) => this.search(text)} />
                         <MessageList messages={this.state.messages} />
                     </div>
