@@ -39,6 +39,7 @@ app.post('/send', (req, res) => {
                     case 'find_providers':
                         res.json({
                             msg: `You have 5 Providers near you the closest one is 3.2 miles from you, I've marked their location in your links!`,
+                            type: 'message',
                             link: 'http://maps.apple.com/?q=Doctor',
                             subject: 'Care Providers',
                             label: 'danger',
@@ -48,6 +49,7 @@ app.post('/send', (req, res) => {
                     case 'deductible_info':
                         res.json({
                             msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.',
+                            type: 'message',
                             link: null,
                             subject: null,
                             label: null,
@@ -57,6 +59,7 @@ app.post('/send', (req, res) => {
                     case 'insurance_purchase':
                         res.json({
                             msg: 'Awesome! I can recommend the BlueSelect or BlueOptions plans for you for only $226 and $310 per month respectively!',
+                            type: 'message',
                             link: 'https://consumer.websales.floridablue.com/cws/shopping/info',
                             subject: 'Insurance Purchase Info',
                             label: 'primary2',
@@ -66,6 +69,7 @@ app.post('/send', (req, res) => {
                     case 'test':
                         res.json({
                             msg: 'I read you loud and clear! What can I assist you with today?',
+                            type: 'message',
                             link: null,
                             subject: null,
                             label: null,
@@ -75,6 +79,7 @@ app.post('/send', (req, res) => {
                     case 'greeting':
                         res.json({
                             msg: 'Hello! How can I help you today?',
+                            type: 'message',
                             link: null,
                             subject: null,
                             label: null,
@@ -83,7 +88,9 @@ app.post('/send', (req, res) => {
                         break;
                     case 'bye':
                         res.json({
-                            msg: 'Glad I could help, have a fantastic rest of your day!', link: null,
+                            msg: 'Glad I could help, have a fantastic rest of your day!',
+                            type: 'message',
+                            link: null,
                             subject: null,
                             label: null,
                             timestamp: moment().format('h:mm a')
@@ -92,6 +99,7 @@ app.post('/send', (req, res) => {
                     case 'help':
                         res.json({
                             msg: 'What can I help you with? I can help with things like Insurance Purchases, Deductible information, and Provider data.',
+                            type: 'message',
                             link: null,
                             subject: null,
                             label: null,
@@ -102,6 +110,7 @@ app.post('/send', (req, res) => {
                         console.log(data.entities.intent);
                         res.json({
                             msg: 'Yikes not really sure what to do',
+                            type: 'message',
                             link: null,
                             subject: null,
                             label: null,
@@ -110,7 +119,9 @@ app.post('/send', (req, res) => {
                 }
             } else {
                 res.json({
-                    msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"', link: null,
+                    msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"',
+                    type: 'message',
+                    link: null,
                     subject: null,
                     label: null,
                     timestamp: moment().format('h:mm a')

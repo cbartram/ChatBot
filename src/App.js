@@ -48,8 +48,14 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            users: [1],
-            messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?', color: '#f1f0f0', timestamp: Moment().format('h:mm a')}], //Default text sent from the Chat Bot
+            messages: [
+                {
+                    user: 0,
+                    type: 'message',
+                    text: 'Hey, Im ChatBot how can I help you today?',
+                    color: '#f1f0f0',
+                    timestamp: Moment().format('h:mm a')}
+                ],
             showSearch: false, //Toggles the search bar open or closed
             queryResults: [],
             links: [],
@@ -61,7 +67,6 @@ export default class App extends Component {
     }
 
     updateDimensions = () => {
-        console.log($(window).height());
         this.setState({width: $(window).width(), height: $(window).height()});
     };
     componentWillMount = () => {
@@ -92,7 +97,7 @@ export default class App extends Component {
                linkData.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
             }
 
-            messages.push({user: 0, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
+            messages.push({user: 0, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
 
             this.setState({messages, links: linkData});
         });
@@ -140,10 +145,22 @@ export default class App extends Component {
     };
 
     handleColorChange = (color) => {
-        this.setState({color: color.hex});
+
+        let { messages } = this.state;
+
+        messages.push({
+            user: 2, //0 is bot, 1 is you, 2 is an event message
+            type:'event',
+            text: 'You changed the chat color',
+            color: color.hex,
+            timestamp: null
+        });
+
+        this.setState({color: color.hex, messages});
 
         //Toggle the modal once the color is selected
         this.toggleModal();
+
     };
 
 
@@ -196,7 +213,7 @@ export default class App extends Component {
 
             <div className="row">
                 <div className="col-md-9 col-md-offset-3 no-padd">
-                    <MessageForm color={this.state.color} onMessageSubmit={(message) => this.handleMessageSubmit(message)} user={this.state.users} />
+                    <MessageForm color={this.state.color} onMessageSubmit={(message) => this.handleMessageSubmit(message)} />
                 </div>
             </div>
 

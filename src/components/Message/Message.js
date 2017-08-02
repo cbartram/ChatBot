@@ -21,29 +21,61 @@ export default class Message extends Component {
 
 
     renderAvatar = () => {
-        return this.props.user >= 1 ? <Avatar user={true} /> : <Avatar user={false} />
+        return this.props.user === 1 ? <Avatar user={true} /> : <Avatar user={false} />
     };
 
     renderText = () => {
-        return this.props.user >= 1 ?
-            <p className="message-user" style={{backgroundColor: this.props.color, marginTop: this.state.margin }}>{this.props.text}</p> :
-            <p className="message-bot" style={{backgroundColor: this.props.color, marginTop: this.state.margin }}>{this.props.text}</p>
+
+        switch(this.props.user) {
+            case 1:
+                return (
+                    <div className="row">
+                        <div className="col-md-1">
+                            {this.renderAvatar()}
+                        </div>
+                        <div className="col-md-9">
+                            <p className="message-user" style={{backgroundColor: this.props.color, marginTop: this.state.margin }}>{this.props.text}</p>
+                        </div>
+                        <div className="col-md-2">
+                            <div className="timestamp" style={{marginTop: this.state.margin}}>
+                                { this.props.timestamp }
+                            </div>
+                        </div>
+                    </div>
+                );
+            case 0:
+                return (
+                    <div className="row">
+                        <div className="col-md-1">
+                            {this.renderAvatar()}
+                        </div>
+                        <div className="col-md-9">
+                            <p className="message-bot" style={{backgroundColor: this.props.color, marginTop: this.state.margin }}>{this.props.text}</p>
+                        </div>
+                        <div className="col-md-2">
+                            <div className="timestamp" style={{marginTop: this.state.margin}}>
+                                { this.props.timestamp }
+                            </div>
+                        </div>
+                    </div>
+                );
+            case 2:
+                return (
+                    <div className="row">
+                        <div className="col-md-2 col-md-offset-5">
+                            <div className="timestamp">
+                                {this.props.text}
+                            </div>
+                        </div>
+                    </div>
+                )
+        }
     };
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-1">
-                    {this.renderAvatar()}
-                </div>
-                <div className="col-md-9">
-                    {this.renderText()}
-                </div>
-                <div className="col-md-2">
-                    <div className="timestamp" style={{marginTop: this.state.margin}}>
-                        { this.props.timestamp }
-                    </div>
-                </div>
+            <div>
+                {this.renderText()}
             </div>
         );
     }

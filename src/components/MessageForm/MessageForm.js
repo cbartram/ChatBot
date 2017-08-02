@@ -16,7 +16,8 @@ export default class MessageList extends Component {
 
         //Create the Message Object
         let message = {
-            user : this.props.user,
+            user : 1, //The message being typed always comes from the user
+            type: 'message',
             text : this.state.text,
             color : this.props.color,
             timestamp: Moment().format('h:mm a'),
