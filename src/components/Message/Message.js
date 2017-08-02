@@ -63,7 +63,7 @@ export default class Message extends Component {
                 return (
                     <div className="row">
                         <div className="col-md-2 col-md-offset-5">
-                            <div className="timestamp">
+                            <div className="event-text">
                                 {this.props.text}
                             </div>
                         </div>

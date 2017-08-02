@@ -63,6 +63,7 @@ export default class App extends Component {
             color: '#0084ff',
             width: $(window).width(),
             height: $(window).height(),
+            searchIndex: 0, //The index we are currently at to show the search for
         }
     }
 
@@ -97,7 +98,7 @@ export default class App extends Component {
                linkData.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
             }
 
-            messages.push({user: 0, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
+            messages.push({user: res.user, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
 
             this.setState({messages, links: linkData});
         });
@@ -132,11 +133,12 @@ export default class App extends Component {
       this.state.messages.forEach((message) => {
           //Text matches
           if(message.text.toUpperCase().includes(text.toUpperCase())) {
-                if(message.user === 0) {
-                    queryResults.push({__html: `Found <strong>${text}</strong> in the message <strong>"${message.text}"</strong> that was sent from <strong>ChatBot</strong>`});
-                } else {
-                    queryResults.push({__html: `Found <strong>${text}</strong> in the message <strong>"${message.text}"</strong> that was sent from <strong>You</strong>`});
-                }
+              queryResults.push({
+                  query: text,
+                  message: message.text,
+                  from: message.user
+              });
+                    //Found <span className="highlight">${text}</span> in the message <span className="highlight>"${message.text}"</span> that was sent from <span className="highlight">ChatBot</span>`
           }
       });
 
@@ -160,7 +162,28 @@ export default class App extends Component {
 
         //Toggle the modal once the color is selected
         this.toggleModal();
+    };
 
+    increaseSearchIndex = () => {
+        //If the next index in the queryResults is null
+        if(this.state.searchIndex + 1 > this.state.queryResults.length) {
+            this.setState({ searchIndex: 0 });
+        } else {
+            this.setState(prevState => {
+                return {searchIndex: prevState.searchIndex + 1}
+            })
+        }
+    };
+
+    decreaseSearchIndex = () => {
+        //If the next index in the queryResults is null
+        if(this.state.searchIndex - 1 < 0) {
+            this.setState({ searchIndex: 0 });
+        } else {
+            this.setState(prevState => {
+                return {searchIndex: prevState.searchIndex - 1}
+            });
+        }
     };
 
 
@@ -199,13 +222,18 @@ export default class App extends Component {
                         <LinkContainer data={this.state.links}>
                             {/* Links or Pictures from the Conversation are passed to LinkContainer as props */}
                         </LinkContainer>
-                        <QueryResults results={this.state.queryResults} />
+                        <QueryResults results={this.state.queryResults} index={this.state.searchIndex} />
                     </Options>
 
                 </div>
                 <div className="col-md-9 no-padd">
                     <div className="well overflow" style={{height: this.state.height - 106}}> {/* Subtract 106 PX from the height for the form */}
-                        <SearchBar show={this.state.showSearch} onClick={(text) => this.search(text)} />
+                        <SearchBar
+                            show={this.state.showSearch}
+                            onClick={(text) => this.search(text)}
+                            up={this.increaseSearchIndex}
+                            down={this.decreaseSearchIndex}
+                        />
                         <MessageList messages={this.state.messages} />
                     </div>
                 </div>

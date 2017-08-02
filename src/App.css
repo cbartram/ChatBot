@@ -1,6 +1,7 @@
-html, body, h1, h2, h3, h4, h5, h6, p, span {
+html, body {
     font-family: SFUIText-Regular, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow:hidden;
+    background-color:#fafafa;
 }
 .container-fluid {
     padding-left:0;
@@ -8,7 +9,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .well {
-    background-color:white;
+    background-color:#fafafa;
     border-radius:0;
     box-shadow:none;
     border-top:none;

@@ -32,6 +32,10 @@
 
 .timestamp {
     color: rgba(0, 0, 0, .3);
+    text-align:center;
+}
+.event-text {
+    color: rgba(0, 0, 0, .3);
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
