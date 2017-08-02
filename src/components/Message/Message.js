@@ -19,8 +19,13 @@ export default class Message extends Component {
                 <div className="col-md-1">
                     {this.renderAvatar()}
                 </div>
-                <div className="col-md-9 message">
+                <div className="col-md-9">
                     {this.renderText()}
+                </div>
+                <div className="col-md-2">
+                    <div className="timestamp">
+                        { this.props.timestamp }
+                    </div>
                 </div>
             </div>
         );

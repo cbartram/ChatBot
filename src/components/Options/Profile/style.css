@@ -23,6 +23,7 @@
 .avatar-container {
     width:45px;
     height:45px;
+    margin-bottom:15px;
 }
 
 .name-subtitle {
@@ -43,7 +44,8 @@
 }
 
 .fa-cog {
-    font-size:30px;
-    margin-top:20px;
+    font-size:24px;
+    margin-top:25px;
     margin-left:20px;
+    color: rgba(0, 0, 0, .2)
 }

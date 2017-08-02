@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import Moment from 'moment';
 
 export default class MessageList extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class MessageList extends Component {
             user : this.props.user,
             text : this.state.text,
             color : this.props.color,
+            timestamp: Moment().format('h:mm a'),
         };
 
         this.props.onMessageSubmit(message);

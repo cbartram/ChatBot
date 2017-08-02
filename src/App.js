@@ -3,7 +3,7 @@ import * as MessageAPI from './MessageAPI';
 import './App.css';
 
 //Custom Components
-import MessageList from './components/MessageList';
+import MessageList from './components/MessageList/MessageList';
 import MessageForm from './components/MessageForm/MessageForm';
 import Navigation from './components/Navigation/Navigation';
 import Options from "./components/Options/Options";
@@ -16,6 +16,7 @@ import QueryResults from "./components/QueryResults/QueryResults";
 import Modal from "react-modal";
 import { CirclePicker } from 'react-color';
 import $ from "jquery";
+import Moment from 'moment';
 
 
 //Custom modal styles
@@ -38,7 +39,7 @@ const customStyles = {
         marginRight: '-50%',
         background: '#FFFFFF',
         transform: 'translate(-50%, -50%)',
-        borderRadius: '4px',
+        borderRadius: '2px',
     }
 };
 
@@ -48,7 +49,7 @@ export default class App extends Component {
 
         this.state = {
             users: [1],
-            messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?', color: '#f1f0f0'}], //Default text sent from the Chat Bot
+            messages: [{user: 0, text: 'Hey, Im ChatBot how can I help you today?', color: '#f1f0f0', timestamp: Moment().format('h:mm a')}], //Default text sent from the Chat Bot
             showSearch: false, //Toggles the search bar open or closed
             queryResults: [],
             links: [],
@@ -88,10 +89,10 @@ export default class App extends Component {
         MessageAPI.send(message, (res) => {
             //There is link data coming back from the response that is applied to the conversation context
             if(res.link !== null) {
-               linkData.push({link: res.link, subject: res.subject, label: res.label});
+               linkData.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
             }
 
-            messages.push({user: 0, text: res.msg, color: '#f1f0f0'}); //The servers response
+            messages.push({user: 0, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
 
             this.setState({messages, links: linkData});
         });

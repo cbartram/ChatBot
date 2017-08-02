@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Message from './Message/Message';
+import Message from '../Message/Message';
+import './style.css';
 
 export default class MessageList extends Component {
     render() {
@@ -13,6 +14,7 @@ export default class MessageList extends Component {
                                 user={message.user}
                                 text={message.text}
                                 color={message.color}
+                                timestamp={message.timestamp}
                             />
                         );
                     })

@@ -1,5 +1,3 @@
-.message {}
-
 .message-bot {
     margin-top:10px;
     color:black;
@@ -34,6 +32,11 @@
     position: relative;
     text-align: left;
     text-rendering: optimizeLegibility;
+}
+
+.timestamp {
+    color: rgba(0, 0, 0, .3);
+    margin-top:20px;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

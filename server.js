@@ -9,6 +9,7 @@ const path = require('path');
 const Server =  require('http');
 const Express = require('express');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 const { Wit } = require('node-wit');
 
 // initialize the server and configure support for ejs templates
@@ -18,7 +19,6 @@ const server = Server.createServer(app);
 const client = new Wit({
     accessToken: "WIPCNZGMJ5KSPEHCQQUAEVYP55MXIIX2",
 });
-
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
@@ -41,11 +41,18 @@ app.post('/send', (req, res) => {
                             msg: `You have 5 Providers near you the closest one is 3.2 miles from you, I've marked their location in your links!`,
                             link: 'http://maps.apple.com/?q=Doctor',
                             subject: 'Care Providers',
-                            label: 'danger'
+                            label: 'danger',
+                            timestamp: moment().format('h:mm a')
                         });
                         break;
                     case 'deductible_info':
-                        res.json({msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.', link: null});
+                        res.json({
+                            msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
                         break;
                     case 'insurance_purchase':
                         res.json({
@@ -56,24 +63,57 @@ app.post('/send', (req, res) => {
                         });
                         break;
                     case 'test':
-                        res.json({msg: 'I read you loud and clear! What can I assist you with today?', link: null});
+                        res.json({
+                            msg: 'I read you loud and clear! What can I assist you with today?',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
                         break;
                     case 'greeting':
-                        res.json({msg: 'Hello! How can I help you today?', link: null});
+                        res.json({
+                            msg: 'Hello! How can I help you today?',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
                         break;
                     case 'bye':
-                        res.json({msg: 'Glad I could help, have a fantastic rest of your day!', link: null});
+                        res.json({
+                            msg: 'Glad I could help, have a fantastic rest of your day!', link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
                         break;
                     case 'help':
-                        res.json({msg: 'What can I help you with? I can help with things like Insurance Purchases, Deductible information, and Provider data.', link: null});
+                        res.json({
+                            msg: 'What can I help you with? I can help with things like Insurance Purchases, Deductible information, and Provider data.',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
                         break;
                     default:
                         console.log(data.entities.intent);
-                        res.json({msg: 'Yikes not really sure what to do', link: null})
-
+                        res.json({
+                            msg: 'Yikes not really sure what to do',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        })
                 }
             } else {
-                res.json({msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"', link: null})
+                res.json({
+                    msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"', link: null,
+                    subject: null,
+                    label: null,
+                    timestamp: moment().format('h:mm a')
+                })
             }
         }).catch(console.error);
 });

@@ -5,7 +5,7 @@ import Avatar from '../../Avatar/Avatar';
 export default class Profile extends Component {
     render() {
         return (
-            <div className="row">
+            <div>
                 <div className="col-md-3">
                     <div className="avatar-container">
                         <Avatar user={true} />
