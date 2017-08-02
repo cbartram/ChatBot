@@ -40,14 +40,14 @@
  comes with a webpack dev server which provides hot reloading of the app. 
  
  There is another NodeJS express server which runs concurrently along with the webpack dev server. 
- Any unknown HTTP requests will be proxies by the webpack dev server along to the NodeJS express server which communicates
+ Any unknown HTTP requests will be proxied by the webpack dev server along to the NodeJS express server which communicates
  directly with Wit.ai's services. 
  
  When a user sends a message the text is sent it a POST request with a `message object` body (see Message Object below) to the Express server where it is passed along to Wit.ai for 
- parsing. Wit.ai will response back with a string representing the `intent` it think best exemplifies the users request. 
+ parsing. Wit.ai will respond back with a string representing the `intent` it thinks best exemplifies the users request. 
  
  From here this intent is acted upon by the Express server and it creates an `intent object` which is used by React to render
- and display the proper responses and associated links
+ and display the proper chatbot responses and associated links in the user interface.
   
  Its important to know that the server and client communicate with **message object requests** and **Intent Object responses**
  
