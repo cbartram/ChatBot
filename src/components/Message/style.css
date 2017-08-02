@@ -1,5 +1,4 @@
 .message-bot {
-    margin-top:10px;
     color:black;
     word-wrap:break-word;
     display:block;
@@ -8,7 +7,6 @@
     margin-right:10px;
     border-radius: 18px 18px 18px 18px;
     box-sizing: border-box;
-    clear:left;
     outline: none 0;
     padding: 6px 12px;
     position: relative;
@@ -17,7 +15,6 @@
 }
 
 .message-user {
-    margin-top:10px;
     max-width: 250px;
     color:white;
     display:block;
@@ -26,7 +23,6 @@
     margin-right:10px;
     border-radius: 18px 18px 18px 18px;
     box-sizing: border-box;
-    clear:left;
     outline: none 0;
     padding: 6px 12px;
     position: relative;
@@ -36,7 +32,6 @@
 
 .timestamp {
     color: rgba(0, 0, 0, .3);
-    margin-top:20px;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

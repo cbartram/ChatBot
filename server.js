@@ -59,7 +59,8 @@ app.post('/send', (req, res) => {
                             msg: 'Awesome! I can recommend the BlueSelect or BlueOptions plans for you for only $226 and $310 per month respectively!',
                             link: 'https://consumer.websales.floridablue.com/cws/shopping/info',
                             subject: 'Insurance Purchase Info',
-                            label: 'primary2'
+                            label: 'primary2',
+                            timestamp: moment().format('h:mm a')
                         });
                         break;
                     case 'test':
