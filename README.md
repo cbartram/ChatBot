@@ -64,6 +64,9 @@
  | `subject`         | String            | The subject specifies the link button's primary text attribute                                                                                                                                                                                                                                                                                                                                    |
  | `label`           | String            | Primary, Danger, Warning or Success to style the button different colors. This attribute is purely cosmetic                                                                                                                                                                                                                                                                                       |
  | `timestamp`       | String            | The timestamp should be a string (usually a formatted momentJS object) which specifies when the message was sent. It is displayed to the right of the message in the dialogue box                                                                                                                                                                                                                 |
+ | `requireAuth`     | Boolean           |  `requireAuth` is a boolean value which specifies whether or not the users intent requires authentication before the server/database can provide the information requested. If auth is false then the information **should not** be presented to the user. It **is up to the developer** to use this value to determine which information is filtered in the chat on the client side                                                                                                                                                                                                               |
+ | `auth`            | Boolean           | Auth is a boolean value which is stored and originates from the server and indicates that the server realizes the user is already authenticated (or not authenticated). The client can use this value to alter the responses accordingly                                                                                                                                                                                                             |
+
  
  An example message object might look like this in the context of the following conversation
  
@@ -97,7 +100,7 @@ A message object might look something like this in the context of the conversati
 
 Bot: "Hello what can I help you with?"
 
-User <Message Object>
+User I need to find a doctor fast!
 
 ```javascript
 {

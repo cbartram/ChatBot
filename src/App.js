@@ -17,6 +17,7 @@ import Modal from "react-modal";
 import { CirclePicker } from 'react-color';
 import $ from "jquery";
 import Moment from 'moment';
+import _ from 'lodash';
 
 
 //Custom modal styles
@@ -63,7 +64,8 @@ export default class App extends Component {
             color: '#0084ff',
             width: $(window).width(),
             height: $(window).height(),
-            searchIndex: 0, //The index we are currently at to show the search for
+            searchIndex: 0, //The index we are currently at to show the search for,
+            auth: false //Whether the user is authenticated or not
         }
     }
 
@@ -94,10 +96,36 @@ export default class App extends Component {
         MessageAPI.send(message, (res) => {
             //There is link data coming back from the response that is applied to the conversation context
             if(res.link !== null) {
-               links.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
+
+                //Dont reshow existing links
+                let exists = false;
+                links.forEach((ele) => {
+                   if(ele.link === res.link) {
+                     exists = true;
+                   }
+                });
+
+                !exists ? links.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp}) : null; //todo do that thing divy said when we dont care about else
             }
 
-            messages.push({user: res.user, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
+                //Update auth status before we send a reply so we don't ask to auth in a loop
+                this.setState({auth: res.auth}, () => {
+                    //Ensure user is authenticated
+                    if(res.requireAuth && !this.state.auth) {
+                        //They need an auth message prompt
+                        messages.push({ user: res.user, type: res.type, text: 'Can you please verify the your date of birth?', color: '#F1F0F0', timestamp: res.timestamp })
+                    } else {
+                        //It requires auth but the user is already authenticated
+                        if(res.requireAuth && this.state.auth) {
+                            messages.push({user: res.user, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
+                        }
+
+                        //If it does not require auth and the user is not authenticated
+                        if(!res.requireAuth) {
+                            messages.push({user: res.user, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
+                        }
+                    }
+                });
 
             this.setState({messages, links});
         });
@@ -209,7 +237,7 @@ export default class App extends Component {
                         </div>
                         <div className="row">
                             <div className="col-md-12 col-sm-12">
-                                <button className="btn btn-default btn-cancel" onClick={this.toggleModal}>Cancel</button>
+                                <button className="btn btn-cancel" onClick={this.toggleModal}>Cancel</button>
                             </div>
                         </div>
                     </Modal>

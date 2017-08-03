@@ -16,6 +16,8 @@ const { Wit } = require('node-wit');
 const app = new Express();
 const server = Server.createServer(app);
 
+let authenticated = false;
+
 const client = new Wit({
     accessToken: "WIPCNZGMJ5KSPEHCQQUAEVYP55MXIIX2",
 });
@@ -39,6 +41,8 @@ app.post('/send', (req, res) => {
                     case 'find_providers':
                         res.json({
                             user: 0,
+                            requireAuth: false,
+                            auth: authenticated,
                             msg: `You have 5 Providers near you the closest one is 3.2 miles from you, I've marked their location in your links!`,
                             type: 'message',
                             link: 'http://maps.apple.com/?q=Doctor',
@@ -50,6 +54,8 @@ app.post('/send', (req, res) => {
                     case 'deductible_info':
                         res.json({
                             user: 0,
+                            requireAuth: true,
+                            auth: authenticated,
                             msg: 'You have the Premium plan it has a $500 deductible and lots of great healthy benefits.',
                             type: 'message',
                             link: null,
@@ -61,6 +67,8 @@ app.post('/send', (req, res) => {
                     case 'insurance_purchase':
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'Awesome! I can recommend the BlueSelect or BlueOptions plans for you for only $226 and $310 per month respectively!',
                             type: 'message',
                             link: 'https://consumer.websales.floridablue.com/cws/shopping/info',
@@ -72,6 +80,8 @@ app.post('/send', (req, res) => {
                     case 'test':
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'I read you loud and clear! What can I assist you with today?',
                             type: 'message',
                             link: null,
@@ -83,6 +93,8 @@ app.post('/send', (req, res) => {
                     case 'greeting':
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'Hello! How can I help you today?',
                             type: 'message',
                             link: null,
@@ -94,6 +106,8 @@ app.post('/send', (req, res) => {
                     case 'bye':
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'Glad I could help, have a fantastic rest of your day!',
                             type: 'message',
                             link: null,
@@ -105,6 +119,8 @@ app.post('/send', (req, res) => {
                     case 'help':
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'What can I help you with? I can help with things like Insurance Purchases, Deductible information, and Provider data.',
                             type: 'message',
                             link: null,
@@ -113,9 +129,47 @@ app.post('/send', (req, res) => {
                             timestamp: moment().format('h:mm a')
                         });
                         break;
+                    case 'personal_inquiry':
+                        res.json({
+                            user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
+                            msg: 'Im doing quite well thanks for asking! How are you?',
+                            type: 'message',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
+                        break;
+
+                    case 'auth':
+                        //TODO AUTHENTICATE USER
+                        console.log(data);
+                        let birthdate = data.entities.datetime[0];
+
+                        //TODO just comparing it to JSON for the prototype
+
+                        authenticated = true;
+
+                        res.json({
+                            user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
+                            msg: 'Thank you for authenticating! What can I help you with',
+                            type: 'message',
+                            link: null,
+                            subject: null,
+                            label: null,
+                            timestamp: moment().format('h:mm a')
+                        });
+                        break;
+
                     default:
                         res.json({
                             user: 0,
+                            requireAuth:false,
+                            auth: authenticated,
                             msg: 'Yikes not really sure what to do',
                             type: 'message',
                             link: null,
@@ -127,6 +181,8 @@ app.post('/send', (req, res) => {
             } else {
                 res.json({
                     user: 0,
+                    requireAuth:false,
+                    auth: authenticated,
                     msg: 'Sorry im not sure what to do with your request. Try asking something like "Find my provider" or "Help me find a plan"',
                     type: 'message',
                     link: null,
@@ -138,7 +194,9 @@ app.post('/send', (req, res) => {
         }).catch(() => {
         res.json({
             user: 2,
-            msg: 'Failed to connect to Wit.ai',
+            requireAuth: false,
+            auth: authenticated,
+            msg: 'Failed to Connect',
             type: 'event',
             link: null,
             subject: null,

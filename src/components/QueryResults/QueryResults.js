@@ -13,12 +13,14 @@ export default class QueryResults extends Component {
                     <span className="highlight">{queryObj.message}</span> from
                     <span className="highlight"> ChatBot</span>
                 </p>
+                <p>{this.props.index + 1} of {this.props.results.length}</p>
             </li> : <li className="result">
                 <p className="result-text">
                     Found <span className="highlight">{queryObj.query}</span> in the message &nbsp;
                     <span className="highlight">{queryObj.message}</span> from
                     <span className="highlight"> You</span>
                 </p>
+                <p>{this.props.index + 1} of {this.props.results.length}</p>
             </li>
         }
     };
