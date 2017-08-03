@@ -86,8 +86,7 @@ export default class App extends Component {
      * @param message Object A Message object created by the child component
      * */
     handleMessageSubmit = (message) => {
-        let {messages} = this.state;
-        let linkData = [];
+        let {messages, links} = this.state;
 
         messages.push(message); //The clients request
 
@@ -95,12 +94,12 @@ export default class App extends Component {
         MessageAPI.send(message, (res) => {
             //There is link data coming back from the response that is applied to the conversation context
             if(res.link !== null) {
-               linkData.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
+               links.push({link: res.link, subject: res.subject, label: res.label, timestamp: res.timestamp});
             }
 
             messages.push({user: res.user, type: res.type, text: res.msg, color: '#f1f0f0', timestamp: res.timestamp}); //The servers response
 
-            this.setState({messages, links: linkData});
+            this.setState({messages, links});
         });
     };
 
@@ -138,7 +137,6 @@ export default class App extends Component {
                   message: message.text,
                   from: message.user
               });
-                    //Found <span className="highlight">${text}</span> in the message <span className="highlight>"${message.text}"</span> that was sent from <span className="highlight">ChatBot</span>`
           }
       });
 
@@ -164,6 +162,9 @@ export default class App extends Component {
         this.toggleModal();
     };
 
+    /**
+     * Handles iterating through search results
+     */
     increaseSearchIndex = () => {
         //If the next index in the queryResults is null
         if(this.state.searchIndex + 1 > this.state.queryResults.length) {
@@ -175,6 +176,9 @@ export default class App extends Component {
         }
     };
 
+    /**
+     * Handles iterating in reverse through search results
+     * */
     decreaseSearchIndex = () => {
         //If the next index in the queryResults is null
         if(this.state.searchIndex - 1 < 0) {
